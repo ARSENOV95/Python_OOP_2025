@@ -12,7 +12,6 @@ class Hero:
     def heal(self,amount :int) -> None:            #a fucntion that does not have a eturn and returns None
         self.health += amount
         
- 
 
 
 hero = Hero("Peter", 100)
