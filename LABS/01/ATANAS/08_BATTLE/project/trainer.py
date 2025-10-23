@@ -1,4 +1,4 @@
-from  project.pokemon import Pokemon #from the project path import the Pokemon class from pokemon.py
+from project.pokemon import Pokemon #from the project path import the Pokemon class from pokemon.py
 
 class Trainer:
     def __init__(self,name :str):
