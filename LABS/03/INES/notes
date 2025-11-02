@@ -1,0 +1,9 @@
+__bases__[0]
+
+child.__class__bases__[0].__name__
+
+#child - име на класа
+#class__bases__ -връща array от наследени класове ако имаме Child(Parent) - ]e imame bases[Parent,]
+#.__name__ връща името на този клас/класове
+#self.__class__.__name__ - връща името на текущия клас
+

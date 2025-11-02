@@ -8,14 +8,14 @@ class Guild:
     def assign_player(self,player: Player) -> str:
         is_in_guild = any(player.name == p.name for p in self.players)
 
-        if not is_in_guild and player.guild == "Unaffiliated":
-            self.players.append(player)
-            player.guild = self.name
-            return f"Welcome player {player.name} to the guild {self.name}"
+        if not is_in_guild:
+            if player.guild == "Unaffiliated":
+                self.players.append(player)
+                player.guild = self.name
+                return f"Welcome player {player.name} to the guild {self.name}"
 
-        if player.guild != self.name and player.guild != "Unaffiliated":
-            return f"Player {player.name} is in another guild."
-
+            else:
+                return f"Player {player.name} is in another guild."
         return f"Player {player.name} is already in the guild."
 
 
@@ -23,7 +23,7 @@ class Guild:
         player = next((p for p in self.players if p.name == player_name),None)
 
         if player:
-            player.guild = "Unaffiliated"
+            player.guild = "Unaffiliated" or player.guild == self.name
             self.players.remove(player)
             return "Player {player_name} has been removed from the guild."
         return f"Player {player_name} is not in the guild."

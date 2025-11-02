@@ -1,0 +1,7 @@
+class Person:
+    def __init(name)
+    self.__name = name <-- mangling "__" it makes the class attribute invisible to the otuside
+
+    def get(self.__name)
+
+__atr
