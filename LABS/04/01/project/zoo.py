@@ -60,8 +60,38 @@ class Zoo:
 
     def animals_status(self):
         result = [f'You have {len(self.animals)} animals']
+        animal_types = dict()
 
         for a in self.animals:
-            result.append(f'{a.__repr__()}')
+            if a.__class__.__name__ not in animal_types.keys():
+                animal_types[a.__class__.__name__] = []
+            animal_types[a.__class__.__name__].append(a.__repr__())
+
+        for type_,animals in animal_types.items():
+            result.append(f'----- {len(animals)} {type_}')
+            for animal in animals:
+                result.append(animal.__repr__())
 
         return '\n'.join(result)
+
+    def workers_status(self):
+        result = [f'You have {len(self.workers)} workers']
+        worker_types = dict()
+
+        for w in self.workers:
+            if w.__class__.__name__ not in worker_types.keys():
+                worker_types[w.__class__.__name__] = []
+            worker_types[w.__class__.__name__].append(w.__repr__())
+
+        for type_,workers_ in worker_types.items():
+            result.append(f'----- {len(workers_)} {type_}')
+            for worker in workers_:
+                result.append(worker.__repr__())
+
+        return '\n'.join(result)
+
+
+
+
+
+
