@@ -13,8 +13,8 @@ class Zoo:
 
 
     def add_animal(self,animal :Animal, price :int) -> str:
-        if self.__budget >= price:
-            if self.__animal_capacity:
+        if self.__budget - price >= 0:
+            if self.__animal_capacity > 0:
                 self.animals.append(animal)
                 self.__budget -= price
                 self.__animal_capacity -= 1
@@ -24,7 +24,7 @@ class Zoo:
 
 
     def hire_worker(self,worker : Worker) -> str:
-        if self.__workers_capacity:
+        if self.__workers_capacity > 0:
             self.workers.append(worker)
             self.__workers_capacity -= 1
             return f"{worker.name} the {worker.__class__.__name__} hired successfully"
@@ -35,13 +35,14 @@ class Zoo:
 
         if worker:
             self.workers.remove(worker)
+            self.__workers_capacity += 1
             return f"{worker_name} fired successfully"
         return f"There is no {worker_name} in the zoo"
 
     def pay_workers(self) -> str:
         salaries = sum(w.salary for w in self.workers)
 
-        if self.__budget >= salaries:
+        if self.__budget -salaries >= 0:
             self.__budget -= salaries
             return f"You payed your workers. They are happy. Budget left: {self.__budget}"
         return "You have no budget to pay your workers. They are unhappy"
@@ -49,7 +50,7 @@ class Zoo:
     def tend_animals(self) -> str:
         expenses = sum(a.money_for_care for a in self.animals)
 
-        if self.__budget >= expenses:
+        if self.__budget - expenses >= 0:
             self.__budget -= expenses
             return f"You tended all the animals. They are happy. Budget left: {self.__budget}"
         return "You have no budget to tend the animals. They are unhappy."
