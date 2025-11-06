@@ -1,3 +1,6 @@
+from pandas.io.formats.info import series_sub_kwargs
+
+
 class PhotoAlbum:
     def __init__(self,pages :int,photos_count = 4):
         self.pages = pages
@@ -24,16 +27,9 @@ class PhotoAlbum:
         return f"{label} photo added successfully on page {page} slot {position}"
 
     def display(self):
-        new_list = []
-        for idx in range(self.photos):
-            new_list[idx] = ['[]',]
+        photo_album = [[] for _ in self.photos]
 
 
-
-
-
-        result = f"{'-*11\n'.join(['[]' for r in i] for i in self.photos)}"
-        return result
 
 
 
