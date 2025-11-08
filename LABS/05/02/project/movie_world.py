@@ -50,12 +50,13 @@ class MovieWorld:
                customer.rented_dvds.append(dvd)
                dvd.is_rented = True
                return f"{customer.name} has successfully rented {dvd.name}"
-       return  None
+
 
     def return_dvd(self,customer_id, dvd_id):
         customer = self.__get_cust(customer_id)
         dvd = self.__get_dvd(dvd_id)
-        if dvd_id in customer.rented_dvds:
+
+        if dvd in customer.rented_dvds:
             customer.rented_dvds.remove(dvd)
             dvd.is_rented = False
             return f"{customer.name} has successfully returned {dvd.name}"
