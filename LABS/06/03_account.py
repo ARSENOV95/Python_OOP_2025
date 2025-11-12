@@ -29,7 +29,7 @@ class Account:
         return  f"Account of {self.owner} with starting amount: {self.amount}"
 
     def __repr__(self):
-        return f"Account({self.owner}, {self.amount})"
+        return self._transactions
 
     def __len__(self):
         return len(self._transactions)
@@ -65,6 +65,7 @@ acc.add_transaction(-20)
 acc.add_transaction(30)
 print(acc.balance)
 print(len(acc))
+
 for transaction in acc:
     print(transaction)
 
