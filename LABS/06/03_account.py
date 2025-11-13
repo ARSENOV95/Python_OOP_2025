@@ -5,31 +5,30 @@ class Account:
         self.amount = amount
         self._transactions: list = []
 
+    @property
+    def balance(self)->int:
+        return self.amount + sum(self._transactions)
+
+
 
     def handle_transaction(self,transaction_amount):
-        curr_bal = self.balance()
-        if curr_bal - transaction_amount >= 0:
+        curr_balance = self.balance
+        if self.balance + transaction_amount >= 0:
             self._transactions.append(transaction_amount)
-            return None
+            return f"New balance: {self.balance}"
         raise ValueError("sorry cannot go in debt!")
 
+    def add_transaction(self,amount :int):
+        if not isinstance(amount,int):
+            raise ValueError("please use int for amount")
+        return self.handle_transaction(amount)
 
-    def add_transaction(self,amount):
-        try:
-            self.handle_transaction(amount)
-            return None
-
-        except ValueError:
-            return  "please use int for amount"
-
-    def balance(self):
-        return  self.amount + sum(self._transactions)
 
     def __str__(self):
         return  f"Account of {self.owner} with starting amount: {self.amount}"
 
     def __repr__(self):
-        return self._transactions
+        return f"Account({self.owner}, {self.amount})"
 
     def __len__(self):
         return len(self._transactions)
@@ -38,21 +37,23 @@ class Account:
         rev = reversed(self._transactions)
         return rev
 
-    def __gt__(self, other):
-        return self.amount > other.amount
+    def __gt__(self, other: "Account"):
+        return self.balance > other.balance
 
-    def __ge__(self, other):
-        return self.amount >= other.amount
+    def __ge__(self, other: "Account"):
+        return self.balance >= other.balance
 
-    def __eq__(self, other):
-        return self.amount == other.amount
+    def __eq__(self, other: "Account"):
+        return self.balance == other.balance
 
-    def __add__(self, other):
-        name = self.owner + '&' + other.owner
-        bal = self.amount + other.amount
-        return Account(name,bal)
+    def __add__(self, other: "Account"):
+        joint_transactions = self._transactions + other._transactions  #whe nahvinf a private property and building a new instance you need to take i nto account the private property as well
+        join_account = Account(owner=f"{self.owner}&{other.owner}", amount=self.amount + other.amount)
+        join_account._transactions = joint_transactions # we cannot retrun the instance, we must store it into a varaible nad init it's private property
+        return join_account
 
-
+    def __getitem__(self, index):
+        return self._transactions[index]
 
 
 
@@ -72,25 +73,15 @@ for transaction in acc:
 print(acc[1])
 
 print(list(reversed(acc)))
-
 acc2.add_transaction(10)
-
 acc2.add_transaction(60)
 
 print(acc > acc2)
-
 print(acc >= acc2)
-
 print(acc < acc2)
-
 print(acc <= acc2)
-
 print(acc == acc2)
-
 print(acc != acc2)
-
 acc3 = acc + acc2
-
 print(acc3)
-
 print(acc3._transactions)
