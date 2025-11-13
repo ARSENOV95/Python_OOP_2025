@@ -1,23 +1,18 @@
 from project.formula_teams.formula_team import FormulaTeam
 
 class MercedesTeam(FormulaTeam):
-    RACE_EXPENSES = 200000
+      
+    @property
+    def RACE_EXPENSES(self) -> int:
+        return 200000
 
-    def __init__(self,budget):
-        super().__init__(budget)
+    @property
 
-    def calculate_revenue_after_race(self,race_pos: int):
-        revenue = 0
-        sponsors = {'Petronas':{1:1000000,3:500000},'TeamViewer':{5:100000,7: 50000}}
+    def title_sponsor(self) -> dict:
+        return {1:1000000,3:500000}
 
-        for sponsor,prize in sponsors.items():
-            for prize_pos,prize_purse in prize:
-                if race_pos == prize_pos:
-                    revenue += prize_purse
-                elif race_pos < prize_pos and race_pos != 1:
-                    revenue += min(prize.values())
+    @property
+    def additional_sponsor(self) -> dict:
+        return {5:100000,7:50000}
 
-        revenue -= self.RACE_EXPENSES
-        self.budget += revenue
-        return f"The revenue after the race is {revenue}$. Current budget {self.budget}$"
 
