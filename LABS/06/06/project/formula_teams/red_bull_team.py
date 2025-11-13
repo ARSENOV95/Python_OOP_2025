@@ -3,7 +3,7 @@ from project.formula_teams.formula_team import FormulaTeam
 class RedBullTeam(FormulaTeam):
 
     @property
-    def RACE_EXPENSES(self) -> int:
+    def expenses(self) -> int:
         return 250000
 
     @property
