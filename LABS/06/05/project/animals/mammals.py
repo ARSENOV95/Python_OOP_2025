@@ -1,7 +1,4 @@
-from abc import abstractmethod
-from socket import send_fds
-
-from project.animals.animal import Animal
+from project.animals.animal import Mammal
 from project.food import Food
 from project.food import Meat
 from project.food import Vegetable
@@ -10,52 +7,38 @@ from project.food import Fruit
 
 
 
-class Mammal(Animal):
-    def __init__(self,name,weight,living_region :str):
-        super().__init__(name,weight,0)
-        self.living_region = living_region
-
-    @abstractmethod
-    def make_sound(self):
-        pass
-
-    @abstractmethod
-    def feed(self,food :Food):
-        super().feed(food)
-
-    @abstractmethod
-    def __repr__(self):
-        pass
-
 
 
 class Mouse(Mammal):
     WEIGHT_PER_MEAL = 0.10
 
-    def make_sound(self):
+    @staticmethod
+    def make_sound()->str:
         return "Squeak"
 
-    def feed(self,food :Food):
-        is_vegetable_or_fruit = isinstance(food,Vegetable) or isinstance(food,Fruit)
-        if is_vegetable_or_fruit:
-            super().feed(food)
+    def feed(self,food :Food)-> None | str:
+        if  isinstance(food,Vegetable) or isinstance(food,Fruit):
+            self.food_eaten += food.quantity
+            self.weight += (self.WEIGHT_PER_MEAL * food.quantity)
             return None
         return f"{self.__class__.__name__} does not eat {food.__class__.__name__}!"
 
 
-    def __repr__(self):
+    def __repr__(self)->str:
             return f"{self.__class__.__name__} [{self.name}, {self.weight}, {self.living_region}, {self.food_eaten}]"
 
 
 class Dog(Mammal):
     WEIGHT_PER_MEAL = 0.40
-    def make_sound(self):
+
+    @staticmethod
+    def make_sound()->str:
         return "Woof!"
 
-    def feed(self,food :Food):
-        is_meat =  isinstance(food, Meat)
-        if is_meat:
-            super().feed(food)
+    def feed(self,food :Food) -> None | str:
+        if isinstance(food, Meat):
+            self.food_eaten += food.quantity
+            self.weight += (self.WEIGHT_PER_MEAL * food.quantity)
             return None
         return f"{self.__class__.__name__} does not eat {food.__class__.__name__}!"
 
@@ -65,34 +48,38 @@ class Dog(Mammal):
 
 class Cat(Mammal):
     WEIGHT_PER_MEAL = 0.30
-    def make_sound(self):
+
+    @staticmethod
+    def make_sound() -> str:
         return "Meow"
 
-    def feed(self,food :Food):
-        is_vegetable_or_meat = isinstance(food, Vegetable) or isinstance(food, Meat)
-        if is_vegetable_or_meat:
-            super().feed(food)
+    def feed(self,food :Food) -> None | str:
+        if isinstance(food, Vegetable) or isinstance(food, Meat):
+            self.food_eaten += food.quantity
+            self.weight += (self.WEIGHT_PER_MEAL * food.quantity)
             return None
         return f"{self.__class__.__name__} does not eat {food.__class__.__name__}!"
 
 
-    def __repr__(self):
+    def __repr__(self) -> str:
             return f"{self.__class__.__name__} [{self.name}, {self.weight}, {self.living_region}, {self.food_eaten}]"
 
 
 
 class Tiger(Mammal):
-    WEIGHT_PER_MEAL = 1.00
-    def make_sound(self):
+    WEIGHT_PER_MEAL = 1
+
+    @staticmethod
+    def make_sound() -> str:
         return "ROAR!!!"
 
-    def feed(self,food :Food):
-        is_meat =  isinstance(food, Meat)
-        if is_meat:
-            super().feed(food)
+    def feed(self,food :Food) -> None | str:
+        if isinstance(food, Meat):
+            self.food_eaten += food.quantity
+            self.weight += (self.WEIGHT_PER_MEAL * food.quantity)
             return None
         return f"{self.__class__.__name__} does not eat {food.__class__.__name__}!"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
             return f"{self.__class__.__name__} [{self.name}, {self.weight}, {self.living_region}, {self.food_eaten}]"
 

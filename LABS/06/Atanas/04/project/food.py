@@ -1,9 +1,8 @@
-from abc import ABC,abstractmethod
+from abc import ABC
 
 class Food(ABC):
-    def __init__(self,quantity :int):
+    def __init__(self,quantity: int):
         self.quantity = quantity
-
 
 class Vegetable(Food):
     pass
@@ -16,4 +15,3 @@ class Meat(Food):
 
 class Seed(Food):
     pass
-

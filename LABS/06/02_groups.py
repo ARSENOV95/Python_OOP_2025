@@ -17,19 +17,16 @@ class Group:
     def __len__(self):
         return len(self.people)
 
-    def __add__(self,other):
-        self.people += other.people
-        return self.people
+    def __add__(self,other: "Group"):
+        return  Group(name=f"{self.name} {other.name}",people=self.people + other.people)
 
 
     def __repr__(self):
-       return f"Group {self.name} with with members {', '.join(f'{p.name} {p.surname}' for p in self.people)}"
+       return f"Group {self.name} with members {', '.join(p.__repr__() for p in self.people)}"
 
 
-    def __next__(self):
-        start = self.people[0]
-        end = self.people[-1]
-
+    def __getitem__(self,index):
+        return f"Person {index}: {self.people[index]}"
 
 
 p0 = Person('Aliko', 'Dangote')
@@ -47,4 +44,4 @@ print(second_group)
 print(third_group[0])
 
 for person in third_group:
-    print(person)
+   print(person)
