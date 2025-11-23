@@ -2,12 +2,12 @@ from abc import ABC, abstractmethod
 
 
 class Computer(ABC):
-    def __init__(self,manufacturer: str,model: str,processor: str = None,ram: int = None,price:int = 0):
+    def __init__(self,manufacturer: str,model: str):
         self.__manufacturer = manufacturer
         self.__model = model
-        self.processor = processor
-        self.ram = ram
-        self.price = price
+        self.processor: str | None = None
+        self.ram: str | None = None
+        self.price:int = 0
 
     @property
     def manufacturer(self):
@@ -15,9 +15,8 @@ class Computer(ABC):
 
     @manufacturer.setter
     def manufacturer(self, value):
-        if not value:
+        if value.strip() == '':
             raise ValueError("Manufacturer name cannot be empty.")
-
         self.__manufacturer = value
 
     @property
@@ -26,7 +25,7 @@ class Computer(ABC):
     
     @model .setter
     def model (self, value):
-        if not value:
+        if value.strip() == '':
             raise ValueError("Model name cannot be empty.")
         self.__model = value
 
@@ -35,7 +34,7 @@ class Computer(ABC):
         pass
 
     def __repr__(self):
-        return f"{self.manufacturer } {self.model} with {self.processor} and {self.ram}GB RAM"
+        return f"{self.manufacturer} {self.model} with {self.processor} and {self.ram}GB RAM"
 
 
 
