@@ -46,6 +46,17 @@ class BaseCollector(ABC):
             raise ValueError("A collector cannot have a negative space available for exhibitions!")
         self.__available_space = value
 
-    def increase_money(self,amaount):
+    @abstractmethod
+    def increase_money(self):
         pass
 
+
+    def can_purchase(self,artifact_price: float, artifact_space_required: int)->bool:
+        if self.__available_space >= artifact_space_required and self.__available_money >= artifact_price:
+            return True
+        return False
+
+
+    def __str__(self):
+        self.purchased_artifacts.sort(reverse=True)
+        return  f"Collector name: {self.__name}; Money available: {self.__available_money}; Space available: {self.__available_space}; Artifacts: {', '.join(self.purchased_artifacts)}"
