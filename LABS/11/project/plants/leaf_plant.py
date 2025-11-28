@@ -19,4 +19,4 @@ class LeafPlant(BasePlant):
         self.__size = value
 
     def plant_details(self):
-        return f"Leaf Plant: {self.name}, Price: {self.price}, Watering: {self.water_needed}ml, Size: {self.size}"
+        return f"Leaf Plant: {self.name}, Price: {self.price}, Watering: {self.water_needed}ml, Size: {self.__size}"

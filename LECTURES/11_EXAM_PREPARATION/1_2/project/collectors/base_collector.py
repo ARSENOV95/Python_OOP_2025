@@ -18,7 +18,7 @@ class BaseCollector(ABC):
 
     @name.setter
     def name(self, value):
-        pattern = r'^[A-Za-z0-9]+[A-Za-z0-9\s]+[A-Za-z0-9]$'
+        pattern = r'^[A-Za-z0-9]+[A-Za-z0-9\s]*[A-Za-z0-9]$'
         match = re.match(pattern,value)
 
         if not match:
@@ -58,5 +58,12 @@ class BaseCollector(ABC):
 
 
     def __str__(self):
+        artifacts = ''
+
+        if not self.purchased_artifacts:
+            artifacts =
+
         self.purchased_artifacts.sort(reverse=True)
-        return  f"Collector name: {self.__name}; Money available: {self.__available_money}; Space available: {self.__available_space}; Artifacts: {', '.join(self.purchased_artifacts)}"
+        artifacts = ', '.join(self.purchased_artifacts)
+
+        return  f"Collector name: {self.__name}; Money available: {self.__available_money}; Space available: {self.__available_space}; Artifacts: {artifacts}"

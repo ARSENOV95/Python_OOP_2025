@@ -39,4 +39,4 @@ class BaseClient(ABC):
         self.total_orders += 1
 
     def client_details(self):
-        return  f"Client: {self.name}, Phone number: {self.phone_number}, Orders count: {self.total_orders}, Discount: {self.discount}%"
+        return  f"Client: {self.name}, Phone number: {self.phone_number}, Orders count: {self.total_orders}, Discount: {int(self.discount* 100)}%"
