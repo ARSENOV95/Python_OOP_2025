@@ -1,7 +1,8 @@
-from plants.base_plant import BasePlant
+from project.plants.base_plant import BasePlant
 
 
 class Flower(BasePlant):
+    SEASONS = ["Spring","Summer","Fall","Winter"]
     def __init__(self,name,price,water_needed,blooming_season :str):
         super().__init__(name,price,water_needed)
         self.__blooming_season = blooming_season
@@ -12,10 +13,8 @@ class Flower(BasePlant):
 
     @blooming_season.setter
     def blooming_season(self, value :str):
-        valid_sizes = ("Spring","Summer","Fall","Winter")
-        if value not in valid_sizes:
+        if value not in self.SEASONS:
             raise ValueError("Blooming season must be a valid one!")
-
         self.__blooming_season = value
 
     def plant_details(self):

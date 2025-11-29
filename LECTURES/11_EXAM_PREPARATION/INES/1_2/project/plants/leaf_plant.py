@@ -1,7 +1,7 @@
-from plants.base_plant import BasePlant
-
+from project.plants.base_plant import BasePlant
 
 class LeafPlant(BasePlant):
+    SIZES = ["S","M","L"]
     def __init__(self,name,price,water_needed,size :str):
         super().__init__(name,price,water_needed)
         self.__size = size
@@ -12,10 +12,8 @@ class LeafPlant(BasePlant):
 
     @size.setter
     def size(self, value :str):
-        valid_sizes = ("S","M","L")
-        if value not in valid_sizes:
+        if value not in self.SIZES:
             raise ValueError("Size must be a valid one!")
-
         self.__size = value
 
     def plant_details(self):

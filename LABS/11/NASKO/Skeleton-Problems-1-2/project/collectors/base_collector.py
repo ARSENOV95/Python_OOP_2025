@@ -6,7 +6,7 @@ from project.artifacts.base_artifact import BaseArtifact
 
 class BaseCollector(ABC):
 
-    def __init__(self, name: str, available_money: float, available_space: int):
+    def __init__(self, name: str,available_money: float, available_space: int):
         self.__name = name
         self.__available_money = available_money
         self.__available_space = available_space
@@ -31,7 +31,7 @@ class BaseCollector(ABC):
 
     @property
     def available_money(self):
-        return
+        return self.__available_money
 
     @available_money.setter
     def available_money(self, value):
