@@ -1,7 +1,7 @@
 from project.album import Album
 
 class Band:
-    def __init__(self,name :str):
+    def __init__(self,name :str,%):
         self.name = name
         self.albums:list[Album] = []
 

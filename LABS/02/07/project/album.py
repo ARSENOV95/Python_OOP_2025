@@ -1,14 +1,10 @@
 from project.song import Song
 
 class Album:
-    def __init__(self,name :str,songs :Song = None): #songs is an object that can either be a list or none
+    def __init__(self,name :str,song: Song): #songs is an object that can either be a list or none
         self.name = name
+        self.songs:list[Song] = song
         self.published = False
-        if songs is None:
-            self.songs: list[Song] = []
-        else:
-            self.songs:list[Song] = [songs]  #can eather be a list of songs of type Song or an empty list of type song
-
 
     def add_song(self,song_name: Song) -> str:
         if self.published:

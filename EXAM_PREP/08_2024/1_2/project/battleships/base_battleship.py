@@ -15,13 +15,13 @@ class BaseBattleship(ABC):
 
     @name.setter
     def name(self, value :str):
-        if not value.strip().isalpha():
+        if not value.isalpha():
             raise ValueError("Ship name must contain only letters!")
         self.__name = value
 
     @property
     def health(self):
-        return
+        return self.__health
 
     @health.setter
     def health(self, value :int):
