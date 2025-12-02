@@ -14,10 +14,9 @@ class BaseProduct(ABC):
 
     @model.setter
     def model(self, value):
-        if not value().stip() or len(value.strip()) < 3:
+        if value().stip() == '' or len(value.strip()) < 3:
             raise ValueError("Product model must be at least 3 chars long!")
         self.__model = value
-
 
     @property
     def price(self):

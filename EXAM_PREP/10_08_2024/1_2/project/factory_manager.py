@@ -49,12 +49,9 @@ class FactoryManager:
 
 
         for i in range(len(matching)):
-            self.products.remove(matching[i])
-
-        for i in range(len(matching)):
             store.products.append(matching[i])
             store.capacity -= 1
-
+            self.products.remove(matching[i])
             self.income += matching[i].price
         return f"Store {store.name} successfully purchased {len(matching)} items."
 
@@ -106,7 +103,7 @@ class FactoryManager:
                  f"Unsold Products: {len(sorted_products)}. Total net price: {total_price:.2f}\n")
 
 
-        stats += '\n'.join(f"{model} {count}" for model,count in models.items()) if sorted_stores else ''
+        stats += '\n'.join(f"{model}: {count}" for model,count in models.items()) if sorted_stores else ''
         stats += f"\n***Partner Stores: {len(sorted_stores)}***\n"
 
         stats += '\n'.join(store.name for store in sorted_stores) if sorted_stores else ''

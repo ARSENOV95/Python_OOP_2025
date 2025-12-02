@@ -9,7 +9,7 @@ class BaseStore(ABC):
     def __init__(self,name :str,location :str,capacity :int):
         self.__name = name
         self.__location = location
-        self.capacity = capacity
+        self.__capacity = capacity
         self.products: list[BaseProduct] = []
 
     @property
@@ -18,7 +18,7 @@ class BaseStore(ABC):
     
     @name.setter
     def name(self, value :str):
-        if value.strip() == '':
+        if not value.strip:
             raise ValueError("Store name cannot be empty!")
         self.__name = value
 
@@ -28,7 +28,7 @@ class BaseStore(ABC):
     
     @location.setter
     def location(self, value :str):
-        if len(value.strip()) != 3:
+        if len(value.strip()) != 3 or ' ' in value.strip():
             raise ValueError("Store location must be 3 chars long!")
         self.__location = value
 
@@ -44,7 +44,7 @@ class BaseStore(ABC):
 
 
     def get_estimated_profit(self):
-        profit = (sum(product.price for product in self.products) * self.VAT)/100
+        profit = (sum(product.price for product in self.products)) * (self.VAT/100)
         return f"Estimated future profit for {len(self.products)} products is {profit:.2f}"
 
     @property

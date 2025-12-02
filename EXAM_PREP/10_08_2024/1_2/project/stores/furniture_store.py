@@ -24,6 +24,6 @@ class FurnitureStore(BaseStore):
                  f"**Furniture for sale:\n")
 
         stats += '\n'.join(f'{model}: {len(prices)}pcs, '
-                          f'average price: {sum(prices)/len(prices):.2f}'for model,prices in models.items()) if self.products else ''
+                          f'average price: {sum(prices)/len(prices):.2f}'for model,prices in models.items())
 
-        return stats
+        return stats.strip()
