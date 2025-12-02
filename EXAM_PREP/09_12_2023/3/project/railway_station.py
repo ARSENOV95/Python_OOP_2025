@@ -32,3 +32,8 @@ class RailwayStation:
             self.departure_trains.popleft()
             return True
         return False
+
+
+station = RailwayStation('BLAA')
+station.new_arrival_on_board('abcd')
+print(station.arrival_trains)
