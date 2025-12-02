@@ -52,5 +52,6 @@ class VehicleTest(TestCase):
 
         self.assertEqual(expected,str(self.test_vehicle))
 
+
 if __name__ == '__main__':
     main()
