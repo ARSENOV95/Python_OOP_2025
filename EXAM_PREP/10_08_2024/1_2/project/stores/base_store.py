@@ -7,9 +7,9 @@ class BaseStore(ABC):
     VAT = 10
 
     def __init__(self,name :str,location :str,capacity :int):
-        self.__name = name
-        self.__location = location
-        self.__capacity = capacity
+        self.name = name
+        self.location = location
+        self.capacity = capacity
         self.products: list[BaseProduct] = []
 
     @property
